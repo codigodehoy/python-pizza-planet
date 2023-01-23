@@ -24,6 +24,13 @@
         "Run API",
         "Run UI",
       ],
+    },
+    {
+      "label": "Test API",
+      "type": "shell",
+      "command": [
+        "make run_test_api"
+      ]
     }
   ]
 }
