@@ -4,12 +4,11 @@ import tempfile
 import pytest
 from app import create_app, register_blueprints
 from app.plugins import db, ma
-# flake8: noqa
-from app.repositories.models import Ingredient, Order, OrderDetail, Size
 
 from .fixtures.ingredient import *
 from .fixtures.order import *
 from .fixtures.size import *
+from .fixtures.beverage import *
 
 
 @pytest.fixture
