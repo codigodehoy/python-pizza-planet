@@ -15,3 +15,4 @@ class Order(db.Model):
 
     size = db.relationship('Size', backref=db.backref('size'))
     detail = db.relationship('OrderDetail', backref=db.backref('order_detail'))
+    beverage = db.relationship('BeverageDetail', backref=db.backref('beverage_detail'))
