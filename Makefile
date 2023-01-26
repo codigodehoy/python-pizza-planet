@@ -17,4 +17,5 @@ run_test_api:
 .PHONY: generate_report
 generate_report:
 	. venv/bin/activate \
-	&& python3 manage.py test
+	&& coverage run manage.py test
+	&& coverage	report
