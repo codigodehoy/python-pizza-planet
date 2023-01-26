@@ -13,3 +13,8 @@ run_ui:
 run_test_api:
 	. venv/bin/activate \
 	&& python3 manage.py test
+
+.PHONY: generate_report
+generate_report:
+	. venv/bin/activate \
+	&& python3 manage.py test
