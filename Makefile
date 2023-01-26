@@ -12,5 +12,4 @@ run_ui:
 .PHONY: run_test_api
 run_test_api:
 	. venv/bin/activate \
-	&& python3 manage.py test \
-	&& coverage report
+	&& python3 manage.py test

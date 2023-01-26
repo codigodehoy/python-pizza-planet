@@ -27,3 +27,6 @@ jobs:
 
       - name: Run tests
         run: make run_test_api
+
+      - name: Run coverage
+        run: coverage report
