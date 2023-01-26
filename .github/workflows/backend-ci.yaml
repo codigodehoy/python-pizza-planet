@@ -1,0 +1,32 @@
+name: Backend CI
+
+on:
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3 
+      
+      - name: Set up Python 3.9.13
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9.13
+      
+      - name: Create venv
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          pip3 install -r requirements.txt
+          deactivate
+
+      - name: Run tests
+        run: make run_test_api
+
+      - name: Generate report
+        run: make generate_report
