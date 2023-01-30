@@ -18,4 +18,4 @@ run_test_api:
 generate_report:
 	. venv/bin/activate \
 	&& coverage run manage.py test \
-	&& coverage report
+	&& coverage xml \
