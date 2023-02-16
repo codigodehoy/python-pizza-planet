@@ -9,7 +9,7 @@ def test_create_beverage_returns_successful_response_when_reciving_valid_beverag
     assert 'price' in created_beverage
 
 
-def test_get_beverages_returns_all_created_sizes_when_reciving_valid_beverages(client, create_beverages, beverage_uri):
+def test_get_beverages_returns_all_created_beverages_when_reciving_valid_beverages(client, create_beverages, beverage_uri):
     response = client.get(beverage_uri)
 
     assert response.status_code == 200
