@@ -1,7 +1,7 @@
 from app.common.http_methods import GET, POST
-from flask import Blueprint, jsonify, request
+from flask import Blueprint
 
-from .base import create_entity, get_entity, update_entity, get_entity_by_id
+from .base import create_entity, get_entity, get_entity_by_id
 from ..controllers import OrderController
 
 order = Blueprint('order', __name__)
