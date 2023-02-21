@@ -1,11 +1,15 @@
- 
-def get_id_ith_sales(dictionaty: dict)-> dict:
-  id_with_sales = dict()
-  for id in dictionaty:
-    client = dictionaty.get(id)
-    id_with_sales[id]=client.get('sales')
-  return id_with_sales
+from typing import Dict
 
-def get_key_best_products(dictionary: dict ):
-  products= [key for key, value in dictionary.items() if value == max(dictionary.values())]
-  return products
+
+def get_id_with_sales(data: Dict[str, Dict[str, int]]) -> Dict[str, int]:
+    id_with_sales = {}
+    for id in data:
+        client = data.get(id)
+        id_with_sales[id] = client.get('sales')
+    return id_with_sales
+
+
+def get_key_best_products(data: dict):
+    products = [key for key, value in data.items() if value ==
+                max(data.values())]
+    return products

@@ -3,7 +3,7 @@ from flask import Blueprint, jsonify, request
 from collections import ChainMap
 import operator
 
-from ..assets import get_id_ith_sales
+from ..assets import get_id_with_sales
 from ..assets import get_key_best_products
 from ..factory import ReportFactory
 from ..controllers import OrderController
@@ -16,7 +16,7 @@ def get_report_customers():
     orders, error = OrderController.get_all()
     report = ReportFactory.build_report("customers")
     sales_by_each_client = report.get_sales_by_each_product(orders)
-    client_dni_with_sales = get_id_ith_sales(sales_by_each_client)
+    client_dni_with_sales = get_id_with_sales(sales_by_each_client)
 
     clients_sort = sorted(client_dni_with_sales.items(), key=operator.itemgetter(1), reverse=True)
 
@@ -51,7 +51,7 @@ def get_report_popular_ingredient():
     report = ReportFactory.build_report("ingredient")
     sales_by_each_ingredient = report.get_sales_by_each_product(orders)
     
-    ingredient_id_with_sales = get_id_ith_sales(sales_by_each_ingredient)
+    ingredient_id_with_sales = get_id_with_sales(sales_by_each_ingredient)
     ingredients_most_required= get_key_best_products(ingredient_id_with_sales)
 
     for ingredient_id in ingredients_most_required:
