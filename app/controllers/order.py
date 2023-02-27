@@ -1,5 +1,3 @@
-from sqlalchemy.exc import SQLAlchemyError
-
 from ..common.utils import check_required_keys
 from ..repositories.managers.ingredient import IngredientManager
 from ..repositories.managers.beverage import BeverageManager
@@ -11,6 +9,16 @@ from .base import BaseController
 class OrderController(BaseController):
     manager = OrderManager
     __required_info = ('client_name', 'client_dni', 'client_address', 'client_phone', 'size_id')
+
+    @classmethod
+    def get_top_month(cls):
+        return cls.handle_exception(lambda: cls.manager.get_month())
+
+        
+    @classmethod
+    def get_top_costumers(cls):
+        return cls.handle_exception(lambda: cls.manager.get_costumers())
+
 
     @staticmethod
     def  get_prices_from_products(products: list) -> float:
@@ -61,9 +69,7 @@ class OrderController(BaseController):
         ingredients = cls.get_products_for_order(current_order, 'ingredients')
         beverages = cls.get_products_for_order(current_order, 'beverages')
 
-        try:
-            price = cls.calculate_order_price(size.get('price'), ingredients, beverages)
-            order_with_price = {**current_order, 'total_price': price}
-            return cls.manager.create(order_with_price, ingredients, beverages), None
-        except (SQLAlchemyError, RuntimeError) as ex:
-            return None, str(ex)
+        price = cls.calculate_order_price(size.get('price'), ingredients, beverages)
+        order_with_price = {**current_order, 'total_price': price}
+        
+        return cls.handle_exception(lambda: cls.manager.create(order_with_price, ingredients, beverages))
