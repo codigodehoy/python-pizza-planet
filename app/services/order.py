@@ -7,7 +7,7 @@ from ..controllers import OrderController
 order = Blueprint('order', __name__)
 
 
-@order.route('/', methods=POST)
+@order.route('/create', methods=POST)
 def create_order():
     return create_entity(OrderController)
 

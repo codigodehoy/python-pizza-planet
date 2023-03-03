@@ -7,12 +7,12 @@ from ..controllers.beverage import BeverageController
 beverage = Blueprint('beverage', __name__)
 
 
-@beverage.route('/', methods=POST)
+@beverage.route('/create', methods=POST)
 def create_beverage():
     return create_entity(BeverageController)
 
 
-@beverage.route('/', methods=PUT)
+@beverage.route('/update', methods=PUT)
 def update_beverage():
     return update_entity(BeverageController)
 

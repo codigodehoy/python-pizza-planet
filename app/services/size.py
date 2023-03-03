@@ -7,12 +7,12 @@ from ..controllers import SizeController
 size = Blueprint('size', __name__)
 
 
-@size.route('/', methods=POST)
+@size.route('/create', methods=POST)
 def create_size():
     return create_entity(SizeController)
 
 
-@size.route('/', methods=PUT)
+@size.route('/update', methods=PUT)
 def update_size():
     return update_entity(SizeController)
 

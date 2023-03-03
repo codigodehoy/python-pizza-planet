@@ -7,12 +7,12 @@ from ..controllers import IngredientController
 ingredient = Blueprint('ingredient', __name__)
 
 
-@ingredient.route('/', methods=POST)
+@ingredient.route('/create', methods=POST)
 def create_ingredient():
     return create_entity(IngredientController)
 
 
-@ingredient.route('/', methods=PUT)
+@ingredient.route('/update', methods=PUT)
 def update_ingredient():
     return update_entity(IngredientController)
 
