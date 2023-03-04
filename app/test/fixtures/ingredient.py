@@ -27,7 +27,7 @@ def ingredients():
 
 @pytest.fixture
 def create_ingredient(client, ingredient_uri) -> dict:
-    response = client.post(ingredient_uri, json=ingredient_mock())
+    response = client.post(f'{ingredient_uri}create', json=ingredient_mock())
     return response
 
 
@@ -35,6 +35,6 @@ def create_ingredient(client, ingredient_uri) -> dict:
 def create_ingredients(client, ingredient_uri) -> list:
     ingredients = []
     for _ in range(10):
-        new_ingredient = client.post(ingredient_uri, json=ingredient_mock())
+        new_ingredient = client.post(f'{ingredient_uri}create', json=ingredient_mock())
         ingredients.append(new_ingredient.json)
     return ingredients

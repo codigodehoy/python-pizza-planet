@@ -1,3 +1,4 @@
+from app.test.utils.functions import get_random_string, get_random_price
 
 
 def test_create_size_returns_successful_response_when_reciving_valid_size(create_size):
@@ -7,6 +8,22 @@ def test_create_size_returns_successful_response_when_reciving_valid_size(create
     assert '_id' in created_size
     assert 'name' in created_size
     assert 'price' in created_size
+
+
+def test_update_ingredient_returns_ingredient_with_current_changes_when_reciving_valid_ingredient(client, create_size, size_uri):
+    current_size = create_size.json
+
+    update_data = {
+        **current_size,
+        'name': get_random_string(), 
+        'price': get_random_price(1, 5)
+    }
+    response = client.put(f'{size_uri}update', json=update_data)
+
+    assert response.status_code == 200
+    updated_size = response.json
+    for param, value in update_data.items():
+        assert updated_size[param] == value
 
 
 def test_get_size_by_id_returns_correct_size_when_reciving_valid_id(client, create_size, size_uri):

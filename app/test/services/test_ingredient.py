@@ -18,7 +18,7 @@ def test_update_ingredient_returns_ingredient_with_current_changes_when_reciving
         'name': get_random_string(), 
         'price': get_random_price(1, 5)
     }
-    response = client.put(ingredient_uri, json=update_data)
+    response = client.put(f'{ingredient_uri}update', json=update_data)
 
     assert response.status_code == 200
     updated_ingredient = response.json
