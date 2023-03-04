@@ -24,10 +24,10 @@ class BaseManager:
     @classmethod
     def create(cls, entry: dict):
         serializer = SerializerFactory.get_serializer(cls.model)
-        new_entry = serializer.load(entry)
+        new_entry = serializer().load(entry)
         cls.session.add(new_entry)
         cls.session.commit()
-        return serializer.dump(new_entry)
+        return serializer().dump(new_entry)
 
     @classmethod
     def update(cls, _id: Any, new_values: dict):
