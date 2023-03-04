@@ -7,7 +7,7 @@ from ..models.ingredient import Ingredient
 from ..models.beverage import Beverage
 from ..models.orderDetail import OrderDetail
 from ..models.beverageDetail import BeverageDetail
-from ..serializers import OrderSerializer
+from ...factory.serializers import OrderSerializer
 from ..managers.base import BaseManager
 
 
