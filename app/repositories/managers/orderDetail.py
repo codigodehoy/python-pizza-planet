@@ -2,7 +2,7 @@ from sqlalchemy import func
 
 from ..models.orderDetail import OrderDetail
 from ..models.ingredient import Ingredient
-from ..serializers import OrderDetailSerializer
+from ...factory.serializers import OrderDetailSerializer
 from .base import BaseManager
 
 

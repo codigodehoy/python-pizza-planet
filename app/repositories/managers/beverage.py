@@ -1,7 +1,7 @@
 from typing import Sequence
 
 from ..models.beverage import Beverage
-from ..serializers import BeverageSerializer
+from ...factory.serializers import BeverageSerializer
 from ..managers.base import BaseManager
 
 class BeverageManager(BaseManager):

@@ -1,7 +1,8 @@
 from typing import Any, Optional
 
-from ..serializers import ma
+from ...factory.serializers import ma
 from ..models.orderDetail import db
+from ...factory.serializers import SerializerFactory
 
 class BaseManager:
     model: Optional[db.Model] = None
@@ -10,7 +11,7 @@ class BaseManager:
 
     @classmethod
     def get_all(cls):
-        serializer = cls.serializer(many=True)
+        serializer = SerializerFactory.get_serializer(cls.model)(many=True)
         _objects = cls.model.query.all()
         result = serializer.dump(_objects)
         return result
@@ -22,7 +23,7 @@ class BaseManager:
 
     @classmethod
     def create(cls, entry: dict):
-        serializer = cls.serializer()
+        serializer = SerializerFactory.get_serializer(cls.model)
         new_entry = serializer.load(entry)
         cls.session.add(new_entry)
         cls.session.commit()
