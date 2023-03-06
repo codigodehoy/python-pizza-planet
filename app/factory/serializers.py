@@ -1,10 +1,11 @@
 from app.plugins import ma
-from .models.orderDetail import OrderDetail
-from .models.ingredient import Ingredient
-from .models.size import Size
-from .models.order import Order
-from .models.beverage import Beverage
-from .models.beverageDetail import BeverageDetail
+from ..repositories.models.orderDetail import OrderDetail
+from ..repositories.models.ingredient import Ingredient
+from ..repositories.models.size import Size
+from ..repositories.models.order import Order
+from ..repositories.models.beverage import Beverage
+from ..repositories.models.beverageDetail import BeverageDetail
+
 
 class IngredientSerializer(ma.SQLAlchemyAutoSchema):
 
@@ -20,6 +21,8 @@ class SizeSerializer(ma.SQLAlchemyAutoSchema):
         model = Size
         load_instance = True
         fields = ('_id', 'name', 'price')
+
+
 class BeverageSerializer(ma.SQLAlchemyAutoSchema):
 
     class Meta:
@@ -39,6 +42,8 @@ class OrderDetailSerializer(ma.SQLAlchemyAutoSchema):
             'ingredient_price',
             'ingredient',
         )
+
+
 class BeverageDetailSerializer(ma.SQLAlchemyAutoSchema):
 
     beverage = ma.Nested(BeverageSerializer)
@@ -47,7 +52,7 @@ class BeverageDetailSerializer(ma.SQLAlchemyAutoSchema):
         model = BeverageDetail
         load_instance = True
         fields = (
-            'beverage_pricebeverage'
+            'beverage_price',
             'beverage',
         )
 
@@ -69,6 +74,23 @@ class OrderSerializer(ma.SQLAlchemyAutoSchema):
             'date',
             'total_price',
             'size',
-            'beverage',
             'detail',
+            'beverage',
         )
+
+class SerializerFactory:
+    serializers = {
+        Ingredient: IngredientSerializer,
+        Size: SizeSerializer,
+        Beverage: BeverageSerializer,
+        OrderDetail: OrderDetailSerializer,
+        BeverageDetail: BeverageDetailSerializer,
+        Order: OrderSerializer
+    }
+
+    @staticmethod
+    def get_serializer(model_class):
+        serializer_class = SerializerFactory.serializers.get(model_class)
+        if serializer_class is None:
+            raise ValueError(f"No serializer found for {model_class}")
+        return serializer_class;

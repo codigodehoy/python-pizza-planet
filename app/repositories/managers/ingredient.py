@@ -1,7 +1,7 @@
 from typing import Sequence
 
 from ..models.ingredient import Ingredient
-from ..serializers import IngredientSerializer
+from ...factory.serializers import IngredientSerializer
 from ..managers.base import BaseManager
 
 class IngredientManager(BaseManager):

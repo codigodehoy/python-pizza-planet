@@ -28,7 +28,7 @@ def create_order(client, order_uri, create_ingredients, create_size, create_beve
     beverages = [beverage.get('_id') for beverage in create_beverages]
     size = create_size.json
     size_id = size['_id']
-    order = client.post(order_uri, json={
+    order = client.post(f'{order_uri}create', json={
         **client_data_mock(),
         'size_id': size_id,
         'ingredients': ingredients,
@@ -44,7 +44,7 @@ def create_orders(client, order_uri, create_ingredients, create_sizes, create_be
     sizes = [size.get('_id') for size in create_sizes]
     orders = []
     for _ in range(10):
-        new_order = client.post(order_uri, json={
+        new_order = client.post(f'{order_uri}create', json={
             **client_data_mock(),
             'size_id': shuffle_list(sizes)[0],
             'ingredients': shuffle_list(ingredients)[:5],
