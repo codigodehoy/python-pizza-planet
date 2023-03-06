@@ -2,8 +2,8 @@ name: Backend CI
 
 on:
   pull_request:
-    branches:
-      - "**"
+    paths:
+      - app/**
 
 jobs:
   ci:
