@@ -3,4 +3,4 @@ from .ingredient import ingredient
 from .size import size
 from .index import index
 from .beverage import beverage
-from .orderDetail import order_detail
+from .order_detail import order_detail
